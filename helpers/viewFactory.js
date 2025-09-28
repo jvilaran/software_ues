@@ -48,9 +48,10 @@ class ViewFactory {
         let rows = games.map(game => `
             <tr>
                 <td>${game._id}</td>
-                <td>${game.name}</td>
-                <td>${game.genre}</td>
-                <td>${game.platform}</td>
+                <td>${game.title}</td>
+                <td>${game.type}</td>
+                <td>${game.year}</td>
+                <td>${game.description}</td>
             </tr>
         `).join('');
         return `
@@ -62,7 +63,8 @@ class ViewFactory {
                             <th>ObjectId</th>
                             <th>Nombre</th>
                             <th>Género</th>
-                            <th>Plataforma</th>
+                            <th>Año</th>
+                            <th>Descripción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,9 +92,10 @@ class ViewFactory {
         return `
             <div>
                 <h2>Detalle de Juego</h2>
-                <p><strong>Nombre:</strong> ${game.name}</p>
-                <p><strong>Género:</strong> ${game.genre}</p>
-                <p><strong>Plataforma:</strong> ${game.platform}</p>
+                <p><strong>Nombre:</strong> ${game.title}</p>
+                <p><strong>Género:</strong> ${game.type}</p>
+                <p><strong>Año:</strong> ${game.year}</p>
+                <p><strong>Descripción:</strong> ${game.description}</p>
             </div>
         `;
     }
