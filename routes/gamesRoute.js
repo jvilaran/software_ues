@@ -5,8 +5,8 @@ const router = express.Router();
 
 // Sample route for games
 router.post('/', GamesController.create);
-router.get('/:id', GamesController.get);
 router.get('/', GamesController.getAll);
+router.get('/:id', GamesController.get);
 router.put('/:id', GamesController.put);
 router.delete('/:id', GamesController.delete);
 
