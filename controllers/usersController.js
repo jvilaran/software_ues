@@ -1,6 +1,7 @@
 import UsersModel from '../models/usersModel.js';
 import bcrypt from 'bcrypt';
 import { generateToken } from '../helpers/authenticationHelper.js';
+import ViewFactory from '../helpers/viewFactory.js';
 
 class UsersController {
     constructor() {
@@ -34,7 +35,13 @@ class UsersController {
     async getAll(req, res) {
         try {
             const data = await UsersModel.getAll();
-            res.status(200).json({ msg: "Users retrieved", data });
+
+            // Usar Factory Method para generar la vista HTML
+            const html = ViewFactory.usersListView(data);
+            if (!data) {
+                return res.status(404).send(html);
+            }
+            res.status(200).send(html);
         } catch (error) {
             res.status(500).send(error);
         }
@@ -45,11 +52,12 @@ class UsersController {
             const { id } = req.params;
             const data = await UsersModel.getById(id);
 
+            // Usar Factory Method para generar la vista HTML
+            const html = ViewFactory.createView('user', data);
             if (!data) {
-                return res.status(404).json({ message: 'User not found' });
+                return res.status(404).send(html);
             }
-
-            res.status(200).json({ msg: "User found", data });
+            res.status(200).send(html);
         } catch (error) {
             res.status(500).send(error);
         }

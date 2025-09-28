@@ -7,7 +7,6 @@ export function generateToken(username) {
 
 export function verifyToken(req, res, next) {
     const token = req.header('Authorization').replace('Bearer ', '');
-    console.log(token);
 
     if(!token) {
         return res.status(401).json({ message: 'Access denied. No token provided.' });

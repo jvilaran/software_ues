@@ -27,7 +27,13 @@ class GamesController {
     async getAll(req, res) {
         try {
             const data = await GamesModel.getAll();
-            res.status(200).json(data);
+            
+            // Usar Factory Method para generar la vista HTML
+            const html = ViewFactory.gamesListView(data);
+            if (!data) {
+                return res.status(404).send(html);
+            }
+            res.status(200).send(html);
         } catch (error) {
             res.status(500).send(error);
         }
